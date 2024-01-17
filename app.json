@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "WineCalendar",
+    "name": "Wine Calendar",
     "slug": "WineCalendar",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon":  "./assets/iconWC.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/logoWine.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#771011"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -19,12 +19,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "foregroundImage":  "./assets/iconWC.png",
+        "backgroundColor": "#771011"
+      },
+      "package": "com.unarest.WineCalendar"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon":  "./assets/iconWC.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8f5cd6be-2b91-4bda-9938-c1600d101bfc"
+      }
     }
   }
 }
