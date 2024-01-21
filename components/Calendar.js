@@ -18,6 +18,9 @@ const Calendar = () => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
 
+
+
+
   const calculateWineDaysInYear = (year) => {
     const startOfYear = new Date(year, 0, 1);
     const endOfYear = new Date(year, 11, 31);
@@ -85,14 +88,20 @@ const Calendar = () => {
   };
 
   const renderDay = (day) => {
+    const today = new Date();
+    const isToday =
+      day.getDate() === today.getDate() &&
+      day.getMonth() === today.getMonth() &&
+      day.getFullYear() === today.getFullYear();
+  
     const backgroundImage =
       dayBackgroundImage[day.toISOString()] || require("./wineWithout.png");
     const isWine = backgroundImage === require("./wine.png");
-
+  
     const dayTextColorStyle = isWine
-      ? { color: "#ece6d3" } 
-      : { color: "#6f635b" }; 
-
+      ? { color: "#ece6d3" }
+      : { color: isToday ? "#771011" : "#6f635b" };
+  
     return (
       <TouchableOpacity
         key={day.toISOString()}
@@ -104,13 +113,14 @@ const Calendar = () => {
           style={styles.dayBackgroundImage}
           onLoad={() => setImagesLoaded(true)}
         >
-          <Text style={[styles.dayText, dayTextColorStyle]}>
+          <Text style={[styles.dayText, dayTextColorStyle, isToday && styles.todayContainer]}>
             {day.getDate()}
           </Text>
         </ImageBackground>
       </TouchableOpacity>
     );
   };
+  
 
   const handleDayPress = async (day) => {
     const backgroundImage =
@@ -152,6 +162,11 @@ const Calendar = () => {
     simulateWineWithoutDayPress();
     setShowCalendar(true);
   };
+  const closeCalendar = () => {
+   
+    setShowCalendar(false);
+  };
+
 
   const renderMonth = (monthDate) => {
     const { days } = getMonthData(
@@ -167,7 +182,7 @@ const Calendar = () => {
             month: "long",
             year: "numeric",
           })}
-          <Wine name="glass-wine" size={30} />
+          {/* <Wine name="wine-bar" size={30} /> */}
         </Text>
         <View style={styles.weekContainer}>
           <View style={styles.rowContainer}>
@@ -214,8 +229,10 @@ const Calendar = () => {
           </View>
           <View>
             <Text style={styles.titleText}>
-              mark in the calendar the days when you enjoyed a glass of wine
-            </Text>
+              mark in the calendar the days when you enjoyed a glass of wine 
+      </Text>
+      
+     
           </View>
         </>
       ) : (
@@ -227,10 +244,23 @@ const Calendar = () => {
             const monthDate = new Date(currentMonth.getFullYear(), index);
             return renderMonth(monthDate);
           })}
-          <Text style={styles.titleTextFooter}>
+        
+  <Text style={styles.titleTextFooter}>
             the number of days when you've enjoyed a glass of wine:{" "}
             <Text style={styles.titleTextMark}>{wineDaysInYear}</Text>
           </Text>
+
+<TouchableOpacity
+              underlayColor="#6f635b"
+              onPress={closeCalendar}
+              style={styles.buttonFooter}
+            >
+            
+            <Text style={styles.buttonText}>            
+              menu</Text></TouchableOpacity>
+
+
+        
         </>
       )}
       <View style={styles.footer} />
@@ -280,7 +310,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   footer: {
-    height: 100,
+    //  height: 100,
   },
   dayBackgroundImage: {
     flex: 1,
@@ -305,11 +335,32 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
+buttonFooter:{
+
+    backgroundColor: "#771011",
+    padding: 10,
+    borderRadius: 10,
+    marginTop: 50,
+    alignItems: "center",
+    textAlign:"center",
+    justifyContent:"center",
+   marginLeft:120,
+   marginRight:120,
+   marginBottom:20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 1.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+
   buttonText: {
     color: "#ece6d3",
     fontSize: 20,
     fontFamily: "vidaloka",
-    padding: 5,
   },
   titleText: {
     color: "#6f635b",
@@ -333,6 +384,13 @@ const styles = StyleSheet.create({
     fontSize: 25,
     marginBottom: 20,
   },
+  todayContainer: {
+    // borderWidth: 1,
+  color: "#771011",
+  fontSize: 22,
+
+  },
+  
 });
 
 export default Calendar;

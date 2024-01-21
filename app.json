@@ -4,7 +4,7 @@
     "slug": "WineCalendar",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon":  "./assets/iconWC.png",
+    "icon": "./assets/iconWC.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/logoWine.png",
@@ -15,17 +15,18 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.unarest.WineCalendar"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage":  "./assets/iconWC.png",
+        "foregroundImage": "./assets/iconWC.png",
         "backgroundColor": "#771011"
       },
       "package": "com.unarest.WineCalendar"
     },
     "web": {
-      "favicon":  "./assets/iconWC.png"
+      "favicon": "./assets/iconWC.png"
     },
     "extra": {
       "eas": {
